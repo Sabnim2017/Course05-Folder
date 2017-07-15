@@ -30,7 +30,7 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div ng-controller='ShoppingListToBuyController as toBuy' class="col-md-6">
+    <div ng-controller='ToBuyController as toBuy' class="col-md-6">
      <h2>To Buy:</h2>
      <ul>
        <li ng-repeat="x in toBuy.items">
@@ -42,7 +42,7 @@
     </div>
 
     <!-- Already Bought List -->
-    <div ng-controller='ShoppingListBoughtController as bought'class="col-md-6">
+    <div ng-controller='AlreadyBoughtController as bought'class="col-md-6">
      <h2>Already Bought:</h2>
      <ul>
        <li ng-repeat="y in bought.itemsBought" >
