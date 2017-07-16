@@ -16,6 +16,13 @@ function ToBuyController(ShoppingListCheckOffService) {
        ShoppingListCheckOffService.removeItem(itemIndex);
     };
 
+    toBuy.itemName = "";
+    toBuy.itemQuantity = "";
+
+    toBuy.addItem = function () {
+      ShoppingListCheckOffService.addItem(toBuy.itemName, toBuy.itemQuantity);
+    }
+
 }
 
 AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
@@ -51,12 +58,13 @@ function ShoppingListCheckOffService() {
       items.splice(itemIndex, 1);
     };
 
-    service.addItem = function () {
+    service.addItem = function (itemName, itemQuantity) {
       var item = {
         name: itemName,
-        quantity: quantity
+        quantity: itemQuantity
       };
       items.push(item);
+      console.log(item.name)
     };
 }
 })(); 
