@@ -38,8 +38,16 @@
           <button ng-click="toBuy.removeItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
       </li>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
-    </div>
+     <br>
+     <div ng-if="!toBuy.items.length" class="emptyMessage">Everything is bought!<br></div>
+     <div>
+       <br>
+       <h4>Add more items to your shopping list</h4>
+       <input type="text" ng-model="toBuy.itemName" placeholder="item name">
+       <input type="text" ng-model="toBuy.itemQuantity" placeholder="quantity">
+       <button ng-click="toBuy.addItem();">Add Item</button>
+     </div>
+  </div>
 
     <!-- Already Bought List -->
     <div ng-controller='AlreadyBoughtController as bought'class="col-md-6">
@@ -49,7 +57,7 @@
          Bought {{y.quantity}} {{y.name}}
        </li>
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div ng-if="!bought.itemsBought.length" class="emptyMessage">Nothing bought yet.</div>
     </div>
   </div>
 </div>

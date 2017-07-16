@@ -23,7 +23,6 @@ function AlreadyBoughtController(ShoppingListCheckOffService) {
 	var bought = this;
 
 	bought.itemsBought = ShoppingListCheckOffService.getItemsBought();
-
 }
 
 function ShoppingListCheckOffService() {
@@ -40,11 +39,11 @@ function ShoppingListCheckOffService() {
 	var itemsBought = [];
 
 	service.getItems = function () {
-      return items;
+      	return items;
     };
 
     service.getItemsBought = function () {
-      return itemsBought;
+       return itemsBought;
     };
 
     service.removeItem = function (itemIndex) {
@@ -52,6 +51,12 @@ function ShoppingListCheckOffService() {
       items.splice(itemIndex, 1);
     };
 
+    service.addItem = function () {
+      var item = {
+        name: itemName,
+        quantity: quantity
+      };
+      items.push(item);
+    };
 }
-
 })(); 
