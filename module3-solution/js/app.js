@@ -19,7 +19,7 @@ function NarrowItDownController(MenuSearchService) {
     console.log("Something went wrong here.");
   });
 
-};
+}
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService ($http, ApiBasePath){
@@ -35,5 +35,6 @@ function MenuSearchService ($http, ApiBasePath){
     });
     return response;
   };
+}
 
 }();
