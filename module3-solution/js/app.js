@@ -34,7 +34,7 @@ function MenuSearchService ($http, ApiBasePath){
       url: (ApiBasePath + "/menu_items.json"),
     }
     return response;
-  };
+  });
 
 }
 
