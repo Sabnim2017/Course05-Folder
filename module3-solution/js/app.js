@@ -14,6 +14,7 @@ function NarrowItDownController(MenuSearchService) {
 
   promise.then(function (response) {
     search.items = response.data;
+    console.log(search.items)
   })
   .catch(function (error) {
     console.log("Something went wrong here.");
@@ -24,9 +25,6 @@ function NarrowItDownController(MenuSearchService) {
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService ($http, ApiBasePath){
   var service = this;
-
-  var message = "";
-  var found = [];
 
   service.getMatchedMenuItems = function () {
     var response = $http({
