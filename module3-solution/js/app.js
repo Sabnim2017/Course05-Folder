@@ -37,4 +37,4 @@ function MenuSearchService ($http, ApiBasePath){
   };
 }
 
-}();
+})();
