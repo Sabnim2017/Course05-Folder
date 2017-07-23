@@ -20,13 +20,12 @@
         </div>
         <br><br><br>
         <h3>List of Menu Items</h3>
-        <ul>
-<!--           <li ng-repeat="item in menu.search"> -->
-            <found-items ng-repeat="item in menu.search"></found-items>
-            <!-- {{ item.name }}  ({{item.short_name}})<br> -->
-            <!-- {{ item.description}} -->
-<!--           </li> -->
-        </ul>
+        <found-items></found-items>
+<!--         <ul>
+        <li ng-repeat="item in menu.search">
+            <found-items></found-items>
+        </li>
+        </ul> -->
       </div>
     </div>
     <script src="js/angular.min.js"></script>

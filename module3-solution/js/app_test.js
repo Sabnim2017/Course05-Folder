@@ -7,6 +7,14 @@ angular.module('NarrowItDownApp', [])
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
 .directive('foundItems', FoundItems);
 
+// function FoundItems() {
+//   var ddo = {
+//     template: '{{ item.name }} ({{item.short_name}})<br> {{ item.description}}'
+//   };
+
+//   return ddo;
+// }
+
 function FoundItems() {
   var ddo = {
     templateUrl: 'foundItems.html'
