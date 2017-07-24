@@ -1,4 +1,4 @@
-<ul ng-if='!list.errorMessage'>
+<ul ng-if='!menu.errorMessage'>
   <li ng-repeat="item in menu.found">
     <span class="menu_item">{{ item.name }}  ({{item.short_name}}) </span>
     <button ng-click="menu.onRemove({index: $index});" class="removeItem">Don't want this one!</button><br>
