@@ -60,8 +60,6 @@ function MenuSearchService($http, ApiBasePath) {
         if (searchTerm != "" && foundItems[i].name.toLowerCase().indexOf(searchTerm) !== -1){
           console.log(foundItems[i].name, foundItems[i].description);
           found.push(foundItems[i]);
-        } else {
-          console.log("I'm turning in circles.");
         }
       }
       return found;
