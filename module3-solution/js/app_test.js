@@ -16,7 +16,7 @@ function FoundItemsDirective() {
       errorMessage: '<'
     },
     controller: NarrowItDownController,
-    controllerAs: 'list',
+    controllerAs: 'menu',
     bindToController: true,
   };
   return ddo;
