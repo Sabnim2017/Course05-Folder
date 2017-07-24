@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/angular.min.js"></script>
+    <script src="js/app_test.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <title>Narrow Down Your Menu Choice</title>
@@ -19,9 +21,9 @@
           <button ng-click="menu.getMatchedMenuItems();" class="btn btn-primary">Narrow It Down For Me!</button>
         </div>
         <br><br>
-        <found-items on-remove="menu.removeItem(index)"></found-items>
-<!--         <h3>List of Menu Items</h3>
-        <ul>
+        <found-items items="menu.found" on-remove="menu.removeItem(index)" error-Message="menu.errorMessage">
+        </found-items>
+<!--    <ul>
           <li ng-repeat="item in menu.foundItems">
             <span class="menu_item">{{ item.name }}  ({{item.short_name}}) </span>
             <button ng-click="menu.removeItem($index);" class="removeItem">Don't want this one!</button><br>
@@ -30,7 +32,7 @@
         </ul> -->
       </div>
     </div>
-    <script src="js/angular.min.js"></script>
-    <script src="js/app_test.js"></script>
+<!--     <script src="js/angular.min.js"></script>
+    <script src="js/app_test.js"></script> -->
   </body>
 </html>

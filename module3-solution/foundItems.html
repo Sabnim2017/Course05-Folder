@@ -1,6 +1,5 @@
-<h4>List Menu Items</h4>
-<ul>
-  <li ng-repeat="item in menu.foundItems">
+<ul ng-if='!list.errorMessage'>
+  <li ng-repeat="item in menu.items">
     <span class="menu_item">{{ item.name }}  ({{item.short_name}}) </span>
     <button ng-click="menu.onRemove({index: $index});" class="removeItem">Don't want this one!</button><br>
     <span id="itemDescription">{{ item.description}}</span>

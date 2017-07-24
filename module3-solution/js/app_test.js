@@ -12,8 +12,12 @@ function FoundItemsDirective() {
     templateUrl: 'foundItems.html',
     scope: {
       items: '<',
-      onRemove: '&'
-    }
+      onRemove: '&',
+      errorMessage: ','
+    },
+    controller: NarrowItDownController,
+    controllerAs: 'list',
+    bindToController: true,
   };
   return ddo;
 }
@@ -23,28 +27,32 @@ function NarrowItDownController(MenuSearchService) {
 
   var menu = this;
   menu.searchTerm ="";
+  menu.found = [];
+  menu.errorMessage = false;
   
-  MenuSearchService.getMatchedMenuItems().
-  then(function(found) {
-    menu.foundItems = found;
-  })
-  .catch(function (error) {
-    console.log("Something went terribly wrong.");
-  });
-
   menu.getMatchedMenuItems = function () {
-    MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+    var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+    promise.then( function(response) {
+      if (response.length !== 0) {
+        menu.errorMessage = false;
+        menu.found = response;
+      } else {
+        menu.errorMessage = true;
+      }
+    })
+    .catch(function (error) {
+      console.log("Something went wrong " + error)
+    })
   };
 
   menu.removeItem = function (itemIndex) {
-   MenuSearchService.removeItem(itemIndex);
+    menu.found.splice(itemIndex,1);
   };
 }
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
-  var found = [];
 
   service.getMatchedMenuItems = function (searchTerm) {
  
@@ -53,23 +61,18 @@ function MenuSearchService($http, ApiBasePath) {
     return $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
-      }).then(function (response) {
+    
+    }).then(function (result) {
 
-      var items = response.data.menu_items;
+      var items = result.data.menu_items;
+      var foundItems = [];
       for (var i=0; i<items.length;i++){
-        if (searchTerm != "" && items[i].name.toLowerCase().indexOf(searchTerm) !== -1){
+        if (searchTerm != "" && items[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
           console.log(items[i].name, items[i].description);
-          found.push(items[i]);
+          foundItems.push(items[i]);
         }
       }
       });
-      return found;
+      return foundItems;
   }
-
-  service.removeItem = function (itemIndex) {
-    found.splice(itemIndex, 1);
-  };
-
-
-}
 })();
