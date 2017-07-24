@@ -19,16 +19,14 @@ function FoundItemsDirective() {
 }
 
 NarrowItDownController.$inject = ['MenuSearchService'];
-
 function NarrowItDownController(MenuSearchService) {
 
   var menu = this;
   menu.searchTerm ="";
   
   MenuSearchService.getMatchedMenuItems().
-
   then(function(found) {
-    menu.items = found;
+    menu.foundItems = found;
   })
   .catch(function (error) {
     console.log("Something went terribly wrong.");
@@ -49,21 +47,23 @@ function MenuSearchService($http, ApiBasePath) {
   var found = [];
 
   service.getMatchedMenuItems = function (searchTerm) {
+ 
+    found = [];
 
     return $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
       }).then(function (response) {
 
-      var foundItems = response.data.menu_items;
-      for (var i=0; i<foundItems.length;i++){
-        if (searchTerm != "" && foundItems[i].name.toLowerCase().indexOf(searchTerm) !== -1){
-          console.log(foundItems[i].name, foundItems[i].description);
-          found.push(foundItems[i]);
+      var items = response.data.menu_items;
+      for (var i=0; i<items.length;i++){
+        if (searchTerm != "" && items[i].name.toLowerCase().indexOf(searchTerm) !== -1){
+          console.log(items[i].name, items[i].description);
+          found.push(items[i]);
         }
       }
+      });
       return found;
-    });
   }
 
   service.removeItem = function (itemIndex) {
