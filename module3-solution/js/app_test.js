@@ -75,4 +75,6 @@ function MenuSearchService($http, ApiBasePath) {
       });
       return foundItems;
   }
+}
+
 })();
