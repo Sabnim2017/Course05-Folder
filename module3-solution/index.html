@@ -19,16 +19,16 @@
           <button ng-click="menu.getMatchedMenuItems();" class="btn btn-primary">Narrow It Down For Me!</button>
         </div>
         <br><br><br>
-<!--         <found-items items="menu.found" on-remove="menu.removeItem(index)" error-Message="menu.errorMessage">
-        </found-items> -->
-        <div ng-if="menu.errorMessage">Nothing found.</div>
-        <ul>
+        <found-items items="menu.found" on-remove="menu.removeItem(index)" error-Message="menu.errorMessage">
+        </found-items>
+<!--         <div ng-if="menu.errorMessage">Nothing found.</div> -->
+<!--         <ul>
           <li ng-repeat="item in menu.found">
             <span class="menu_item">{{ item.name }}  ({{item.short_name}}) </span>
             <button ng-click="menu.removeItem($index);" class="removeItem">Don't want this one!</button><br>
             <span id="itemDescription">{{ item.description}}</span>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
     <script src="js/angular.min.js"></script>
