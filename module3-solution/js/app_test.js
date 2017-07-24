@@ -43,7 +43,7 @@ function NarrowItDownController(MenuSearchService) {
       }
     })
     .catch(function (error) {
-      console.log("Something went wrong " + error)
+      console.log("Something went wrong: " + error)
     })
   };
 
@@ -61,9 +61,9 @@ function MenuSearchService($http, ApiBasePath) {
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
     
-    }).then(function (result) {
+    }).then(function (response) {
 
-      var items = result.data.menu_items;
+      var items = response.data.menu_items;
       var foundItems = [];
       for (var i=0; i<items.length;i++){
         if (searchTerm != "" && items[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
