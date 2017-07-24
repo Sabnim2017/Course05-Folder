@@ -13,7 +13,7 @@ function FoundItemsDirective() {
     scope: {
       items: '<',
       onRemove: '&',
-      errorMessage: ','
+      errorMessage: '<'
     },
     controller: NarrowItDownController,
     controllerAs: 'list',
@@ -50,7 +50,7 @@ function NarrowItDownController(MenuSearchService) {
   };
 }
 
-MenuSearchService.$inject = ['$http', 'ApiBasePath'];
+MenuSearchService.$inject = ['$http', 'ApiBasePath', '$filter'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
 
