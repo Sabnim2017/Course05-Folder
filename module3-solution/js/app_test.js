@@ -33,11 +33,13 @@ function NarrowItDownController(MenuSearchService) {
   menu.getMatchedMenuItems = function () {
     var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
     promise.then( function(response) {
+      console.log(response.length);
       if (response.length !== 0) {
         menu.errorMessage = false;
-        menu.found = foundItems;
+        menu.found = response;
       } else {
         menu.errorMessage = true;
+        menu.found = response;
       }
     })
     .catch(function (error) {
