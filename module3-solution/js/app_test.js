@@ -5,23 +5,28 @@ angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
-.directive('foundItems', FoundItems);
+.directive('foundItems', FoundItemsDirective);
 
-function FoundItems() {
+function FoundItemsDirective() {
   var ddo = {
-    templateUrl: 'foundItems.html'
+    templateUrl: 'foundItems.html',
+    scope: {
+      items: '<',
+      onRemove: '&'
+    }
   };
-
   return ddo;
 }
 
 NarrowItDownController.$inject = ['MenuSearchService'];
+
 function NarrowItDownController(MenuSearchService) {
+
   var menu = this;
-
   menu.searchTerm ="";
-
+  
   var promise = MenuSearchService.getMatchedMenuItems();
+
   promise.then(function(found) {
     menu.items = found;
   })
@@ -34,14 +39,13 @@ function NarrowItDownController(MenuSearchService) {
   };
 
   menu.removeItem = function (itemIndex) {
-    items.splice(itemIndex, 1);
+   MenuSearchService.removeItem(itemIndex);
   };
 }
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
-
   var found = [];
 
   service.getMatchedMenuItems = function (searchTerm) {
@@ -52,19 +56,22 @@ function MenuSearchService($http, ApiBasePath) {
       }).then(function (response) {
 
       var foundItems = response.data.menu_items;
-
       for (var i=0; i<foundItems.length;i++){
-        if (foundItems[i].name.toLowerCase().indexOf(searchTerm) !== -1){
+        if (searchTerm != "" && foundItems[i].name.toLowerCase().indexOf(searchTerm) !== -1){
           console.log(foundItems[i].name, foundItems[i].description);
           found.push(foundItems[i]);
         } else {
-          console.log("It did not match.")
+          console.log("I'm turning in circles.");
         }
       }
       return found;
-    })
+    });
+  }
+
+  service.removeItem = function (itemIndex) {
+    found.splice(itemIndex, 1);
   };
 
-}
 
+}
 })();
