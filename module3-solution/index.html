@@ -19,7 +19,7 @@
           <button ng-click="menu.getMatchedMenuItems();" class="btn btn-primary">Narrow It Down For Me!</button>
         </div>
         <br><br>
-        <found-items ng-repeat="item in menu.items" on-remove="menu.removeItem(index)"></found-items>
+        <found-items on-remove="menu.removeItem(index)"></found-items>
 <!--         <h3>List of Menu Items</h3>
         <ul>
           <li ng-repeat="item in menu.items">
