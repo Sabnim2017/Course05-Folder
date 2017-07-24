@@ -18,41 +18,33 @@ function FoundItems() {
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var menu = this;
-  var message ="";
 
-  //  var menu.searchTerm ="";
+  menu.searchTerm ="";
 
   var promise = MenuSearchService.getMatchedMenuItems();
-
-  promise.then(function (foundItems) {
-
-    // menu.found = foundItems;
-    var find = [];
-
-    for (var i=0; i<foundItems.length;i++){
-      if (foundItems[i].name.toLowerCase().indexOf('soup') != -1){
-        console.log(foundItems[i].name, foundItems[i].description);
-        find.push(foundItems[i]);
-      } else {
-        console.log("It did not match.")
-      }
-    }
-
-    menu.found = find;
-
+  promise.then(function(found) {
+    menu.items = found;
   })
   .catch(function (error) {
     console.log("Something went terribly wrong.");
   });
 
+  menu.getMatchedMenuItems = function () {
+    MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+  };
+
+  menu.removeItem = function (itemIndex) {
+    items.splice(itemIndex, 1);
+  };
 }
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
-  var message = "";
 
-  service.getMatchedMenuItems = function () {
+  var found = [];
+
+  service.getMatchedMenuItems = function (searchTerm) {
 
     return $http({
       method: "GET",
@@ -61,7 +53,15 @@ function MenuSearchService($http, ApiBasePath) {
 
       var foundItems = response.data.menu_items;
 
-      return foundItems;
+      for (var i=0; i<foundItems.length;i++){
+        if (foundItems[i].name.toLowerCase().indexOf(searchTerm) !== -1){
+          console.log(foundItems[i].name, foundItems[i].description);
+          found.push(foundItems[i]);
+        } else {
+          console.log("It did not match.")
+        }
+      }
+      return found;
     })
   };
 
