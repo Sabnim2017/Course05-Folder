@@ -35,9 +35,10 @@ function NarrowItDownController(MenuSearchService) {
     promise.then( function(response) {
       if (response.length !== 0) {
         menu.errorMessage = false;
-        menu.found = response;
+        menu.found = foundItems;
       } else {
         menu.errorMessage = true;
+        console.log(menu.errorMessage);
       }
     })
     .catch(function (error) {
