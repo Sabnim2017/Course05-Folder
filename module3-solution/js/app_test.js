@@ -35,7 +35,7 @@ function NarrowItDownController(MenuSearchService) {
     promise.then( function(response) {
       if (response.length !== 0) {
         menu.errorMessage = false;
-        menu.found = response;
+        menu.found = foundItems;
       } else {
         menu.errorMessage = true;
       }
@@ -65,10 +65,11 @@ function MenuSearchService($http, ApiBasePath) {
       var foundItems = [];
       for (var i=0; i<items.length;i++){
         if (searchTerm != "" && items[i].name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
-          console.log(items[i].name, items[i].description);
+          //console.log(items[i].name, items[i].description);
           foundItems.push(items[i]);
         }
       }
+      console.log(foundItems);
       return foundItems;
       });
   };
