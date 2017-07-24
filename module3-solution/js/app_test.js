@@ -72,9 +72,9 @@ function MenuSearchService($http, ApiBasePath) {
           foundItems.push(items[i]);
         }
       }
-      });
       return foundItems;
-  }
+      });
+  };
 }
 
 })();
