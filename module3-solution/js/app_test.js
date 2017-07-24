@@ -7,14 +7,6 @@ angular.module('NarrowItDownApp', [])
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
 .directive('foundItems', FoundItems);
 
-// function FoundItems() {
-//   var ddo = {
-//     template: '{{ item.name }} ({{item.short_name}})<br> {{ item.description}}'
-//   };
-
-//   return ddo;
-// }
-
 function FoundItems() {
   var ddo = {
     templateUrl: 'foundItems.html'
@@ -26,13 +18,28 @@ function FoundItems() {
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var menu = this;
+  var message ="";
 
-  //var menu.searchTerm ="";
+  //  var menu.searchTerm ="";
 
   var promise = MenuSearchService.getMatchedMenuItems();
 
-  promise.then(function (response) {
-    menu.search = response.data.menu_items;
+  promise.then(function (foundItems) {
+
+    // menu.found = foundItems;
+    var find = [];
+
+    for (var i=0; i<foundItems.length;i++){
+      if (foundItems[i].name.toLowerCase().indexOf('soup') != -1){
+        console.log(foundItems[i].name, foundItems[i].description);
+        find.push(foundItems[i]);
+      } else {
+        console.log("It did not match.")
+      }
+    }
+
+    menu.found = find;
+
   })
   .catch(function (error) {
     console.log("Something went terribly wrong.");
@@ -43,15 +50,19 @@ function NarrowItDownController(MenuSearchService) {
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
+  var message = "";
 
   service.getMatchedMenuItems = function () {
 
-    var response = $http({
+    return $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
-    });
+      }).then(function (response) {
 
-    return response;
+      var foundItems = response.data.menu_items;
+
+      return foundItems;
+    })
   };
 
 }

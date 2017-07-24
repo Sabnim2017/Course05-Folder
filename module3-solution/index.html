@@ -16,16 +16,18 @@
           <input type="text" ng-model="menu.searchTerm" placeholder="search term" class="form-control">
         </div>
         <div class="form-group narrow-button">
-          <button class="btn btn-primary">Narrow It Down For Me!</button>
+          <button ng-click="menu.searchMenu()" class="btn btn-primary">Narrow It Down For Me!</button>
         </div>
         <br><br><br>
         <h3>List of Menu Items</h3>
-        <found-items ng-repeat="item in menu.search"></found-items>
-        <!--         <ul>
-        <li ng-repeat="item in menu.search">
-            <found-items></found-items>
-        </li>
-        </ul> -->
+        <!-- <found-items ng-repeat="item in menu.found"></found-items> -->
+        <ul>
+        <li ng-repeat="item in menu.found">
+          <span class="menu_item">{{ item.name }}  ({{item.short_name}}) </span>
+          <button ng-click="menu.removeItem()" class="removeItem">Don't want this one!</button><br>
+          <span id="itemDescription">{{ item.description}}</span>
+         </li>
+        </ul>
       </div>
     </div>
     <script src="js/angular.min.js"></script>
