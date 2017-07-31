@@ -10,7 +10,7 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   // Redirect to home page if no other URL matches
   $urlRouterProvider.otherwise('/');
 
-   // *** Set up UI states ***
+  // *** Set up UI states ***
   $stateProvider
 
   // Home page
@@ -23,19 +23,20 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   .state('categories', {
     url: '/categories',
     templateUrl: 'src/templates/categories.template.html',
-    controller: 'MenuCategorieController as categories',
+    controller: 'MenuCategorieController as categoryList',
     resolve: {
-      categories: ['MenuDataService', function (MenuDataService) {
-        return MenuDataService.getItems();
+      items: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories();
       }]
     }
   })
-  //Menu items for categories page
-  .state('categories.menuItem', {
-    url: '/menu-item/{menuItemId}',
-    templateUrl: 'src/templates/menu-item.template.html',
-    controller: "MenuItemController as menuItem"
-  });
+
+  // //Menu items for categories page
+  // .state('categories.item', {
+  //   url: '/item/{itemId}',
+  //   templateUrl: 'src/templates/item.template.html',
+  //   controller: "ItemController as item"
+  // });
 
 }
 

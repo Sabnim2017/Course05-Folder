@@ -6,7 +6,7 @@
 	<title>View Restaurant Menu</title>
 </head>
 <body>
-  <h1>Restaurant Menu - Items by Category</h1>
+  <h1>Restaurant Menu</h1>
 
   <ui-view></ui-view>
 
@@ -14,6 +14,17 @@
   <script src="lib/angular.min.js"></script>
   <script src="lib/angular-ui-router.min.js"></script>
 
+  <!-- Modules -->
+  <script src="src/menuapp.module.js"></script>
+  <script src="src/data.module.js"></script>
+
+  <!-- Routes -->
+  <script src="src/routes.js"></script>
+
+  <!-- Module Artifacts -->
+  <script src="src/categories.component.js"></script>
+  <script src="src/categories.controller.js"></script>
+  <script src="src/menudata.service.js"></script>
 
 </body>
 </html>
