@@ -6,8 +6,15 @@ body {
 
 .item {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.0em;
 }
 .link{
-	font-size: 1.2em;
+	font-size: 1.0em;
+}
+a {
+	text-decoration: none;
+	color: lightgray;
+}
+li {
+	padding-top: 10px;
 }

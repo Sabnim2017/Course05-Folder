@@ -23,14 +23,17 @@ function MenuDataService($http, ApiBasePath) {
   };
 
   service.getItemsForCategory = function(categoryShortName) {
-    var response = $http({
+
+    var promise = $http({
       method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
+      url: (ApiBasePath + "/menu_items.json?category=" + categoryShortName),
       params: {
         category: categoryShortName
       }
     });
-    return response;
+    return promise.then(function(result) {
+            return result.data;
+    });        
   };
 
 }

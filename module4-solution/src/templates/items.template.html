@@ -1,5 +1,5 @@
-<ul>Test Items by Category List
-  <li ng-repeat="item in $ctrl.items" ui-sref="items">
-    {{ category.name }} - {{ category.short_name }}
-  </li>
-</ul>
+<button ui-sref="home">Home</button> &lt; <button ui-sref="categories">Categories</button> &lt; <span>Items</span>
+
+<h3> {{menuItemsList.name}} Menu Items</h3>
+
+<items-list items="menuItemsList.items"></items-list>

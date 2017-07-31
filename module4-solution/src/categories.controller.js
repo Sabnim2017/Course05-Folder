@@ -9,7 +9,6 @@ function MenuCategorieController(items) {
   var category = this;
 
   category.items = items;
-  
 }
 
 })();
