@@ -37,6 +37,28 @@
 }
 /* END HOME PAGE */
 
+/* SIGN UP PAGE */
+.signupForm {
+  margin-left: 5%;
+}
+.signupInput {
+  margin-left: 1%;
+  width: 30%;
+  background-color: white;
+  color: black;
+}
+.signupLabel {
+  margin-left: 1%;
+  width: 30%;
+}
+.infoEntered {
+  float: right;
+  margin-left: 30px;
+  margin-top: 60px;
+}
+/* End SIGN UP PAGE */
+
+
 /* MENU CATEGORIES PAGE */
 .category-tile {
   position: relative;

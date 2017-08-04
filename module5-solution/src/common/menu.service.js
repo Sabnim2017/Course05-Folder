@@ -9,6 +9,8 @@ MenuService.$inject = ['$http', 'ApiPath'];
 function MenuService($http, ApiPath) {
   var service = this;
 
+  var signups = [];
+
   service.getCategories = function () {
     return $http.get('https://sn-course05.herokuapp.com/categories.json').then(function (response) {
       return response.data;
@@ -27,8 +29,23 @@ function MenuService($http, ApiPath) {
     });
   };
 
+  service.saveSignup = function (signupForm) {
+    if (signupForm.$valid) {
+      console.log("signupForm.$valid is true");
+    //   var user = {
+    //     firstName: signupForm.user.firstName,
+    //     lastName: signupForm.user.lastName,
+    //     email: signupForm.user.email,
+    //     phone: signupForm.phone,
+    //     favDish: signupForm.favDish
+    //   }
+    //   signups.push(user);
+    // }
+    // else {
+    //   throw new Error("Your data was not saved.");
+    // }
+    };
+  }; 
 }
-
-
 
 })();
