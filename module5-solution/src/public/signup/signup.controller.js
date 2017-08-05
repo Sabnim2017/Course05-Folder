@@ -4,11 +4,27 @@
 angular.module('public')
 .controller('SignupFormController', SignupFormController);
 
-SignupFormController.$inject = [];
-function SignupFormController () {
-	var signup = this;
+SignupFormController.$inject = ['SignupService'];
+function SignupFormController (SignupService) {
+  var signup = this;
 
-	console.log("this form SignupFormController", signup)
+  signup.user = {};
+  signup.user.firstName ="";
+  signup.user.lastName = "";
+  signup.user.email="";
+  signup.user.phone ="";
+  signup.user.favDish = "";
+
+  console.log("this is form SignupFormController", signup);
+
+  signup.saveSignupForm = function () {
+    SignupService.saveSignupForm(signup.user);
+  };
+
+  signup.verifyMenuNumber = function () {
+    SignupService.verifyMenuNumber(signup.user.favDish);
+    console.log("signup.user.favDish", signup.user.favDish);
+  };
 }
 
 })();
