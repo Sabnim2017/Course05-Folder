@@ -69,13 +69,17 @@
     </br>
     <input type="text" name="favDish" placeholder="Menu number" class="signupInput" 
       ng-model="signup.user.favDish" required maxlength="5">
+      <span ng-if="signup.errorMessage">No such menu number exists.</span>
     </br></br>
 
 
     <button class="signupInput"
       ng-disabled="signupForm.$invalid"
-      ng-click="signup.saveSignupForm()">Submit
-    </button>
+      ng-click="signup.saveSignupForm()">Submit</button>
+    <span ng-if="signup.saveMessage">Your information has been saved</span>
+    <div>
+      {{signupFormData.firstName}}
+    </div>
     <div style="margin-top: 10px;">
       Form valid? {{ signupForm.$valid }}
     </div>

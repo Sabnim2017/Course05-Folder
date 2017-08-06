@@ -21,10 +21,8 @@ function SignupFormController (SignupService) {
     SignupService.saveSignupForm(signup.user);
   };
 
-  signup.verifyMenuNumber = function () {
-    SignupService.verifyMenuNumber(signup.user.favDish);
-    console.log("signup.user.favDish", signup.user.favDish);
-  };
+  signup.userdata = SignupService.getSignupData();
+
 }
 
 })();
