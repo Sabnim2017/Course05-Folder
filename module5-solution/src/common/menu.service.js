@@ -31,10 +31,10 @@ function MenuService($http, ApiPath) {
   };
 
   var message = [];
-
+  var menuNumber = "";
   service.saveSignupForm = function (signupInfo) {
 
-    var menuNumber = signupInfo.favDish.toUpperCase(); 
+    menuNumber = signupInfo.favDish.toUpperCase(); 
 
     if (menuNumber) {
       console.log("menuNumber", menuNumber);
@@ -42,11 +42,10 @@ function MenuService($http, ApiPath) {
       return $http.get(ApiPath + '/menu_items/' + menuNumber + '.json')
                   .then(function (response) { 
                     console.log(response.data);
-                    console.log("The submit button was pressed.");
 
                     var signup = { 
-                      fname: signupInfo.firstName,
-                      lname: signupInfo.lastName,
+                        fname: signupInfo.firstName,
+                        lname: signupInfo.lastName,
                       email:  signupInfo.email,
                       phone:  signupInfo.phone,
                       favDish: signupInfo.favDish,
@@ -57,7 +56,7 @@ function MenuService($http, ApiPath) {
                     console.log("signups = ", signups);
                     console.log("signups.length", signups.length);
                     message.push("saved");
-
+                    
 
                     }, function (error) {
                         console.log("Error: menu number doesn't exists.");
@@ -78,7 +77,17 @@ function MenuService($http, ApiPath) {
     console.log("message.", message);
     return message;
   };
+  
+  service.getFavDish = function () {
+    return menuNumber;
+  };
 
+  service.getMenuItem = function (short_name) {
+    return $http.get(ApiPath + '/menu_items/'+ short_name +'.json').then(function (response) {
+      return response;
+      console.log(response.data);
+    });
+  };
 
 }
 

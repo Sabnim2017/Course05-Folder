@@ -1,23 +1,35 @@
-<div class="myinfo">
+<div class="container myinfo">
 
-<h1>You are signed up for our eNewsletter</h1>
-<h3>We have the following information for you:</h3>
+<h1>eNewsletter</h1>
+<h3>You are signed up!</h3>
 <br>
 
-<div ng-hide="signupCtrl.message.length==1">
+<div ng-if="myinfoCtrl.signupsSaved">
+
   <div ng-repeat="signup in myinfoCtrl.signups">
-    <label class="myinfoLabel">Name</label>{{signup.fname}}  {{signup.lname}}</br>
-    <label class="myinfoLabel">Email</label>{{signup.email}}</br>
-    <label class="myinfoLabel">Phone</label>{{signup.phone}}</br>
+    <label class="myinfoLabel">Name</label>{{signup.fname}}  {{signup.lname}}<br>
+    <label class="myinfoLabel">Email</label>{{signup.email}}<br>
+    <label class="myinfoLabel">Phone</label>{{signup.phone}}<br>
     <label class="myinfoLabel">Favorite Dish</label>
       {{signup.menuName}} - {{signup.description}} ({{signup.favDish.toUpperCase()}})
   </div>
+
+  <div class="menu-item-tile col-md-6" ng-if="myinfoCtrl.signupsSaved"><br>
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="menu-item-photo">
+            <img class="img-responsive" width="250" height="150" ng-src="{{myinfoCtrl.basePath}}/images/{{myinfoCtrl.menuItem.short_name}}.jpg" alt="{{myinfoCtrl.menuItem.name}}">
+          </div>
+        </div>
+    </div>
+  </div>
+
 </div>
 
 
-<div ng-show="signupCtrl.message.length==2">
-  <h4>Not Signed Up Yet. Sign up Now!</h4>
+<div ng-if="!myinfoCtrl.signupsSaved">
+  <h4>Not Signed Up Yet. Sign up Now!</h4><br>
+  <button ui-sref="public.signup" class="button">Sign Up</button>
 </div>
-
 
 </div>

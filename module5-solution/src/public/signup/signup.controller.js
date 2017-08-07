@@ -16,7 +16,7 @@ function SignupFormController (MenuService) {
   signupCtrl.message = "" ;
 
   console.log("signupCtrl", signupCtrl);
-
+  
   signupCtrl.saveSignupForm = function () {
     MenuService.saveSignupForm(signupCtrl);
   };
