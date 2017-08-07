@@ -4,24 +4,25 @@
 angular.module('public')
 .controller('SignupFormController', SignupFormController);
 
-SignupFormController.$inject = ['SignupService'];
-function SignupFormController (SignupService) {
-  var signup = this;
+SignupFormController.$inject = ['MenuService'];
+function SignupFormController (MenuService) {
+  var signupCtrl = this;
 
-  signup.user = {};
-  signup.user.firstName ="";
-  signup.user.lastName = "";
-  signup.user.email="";
-  signup.user.phone ="";
-  signup.user.favDish = "";
+  signupCtrl.firstName = "";
+  signupCtrl.lastName = "";
+  signupCtrl.email = "";
+  signupCtrl.phone = "";
+  signupCtrl.favDish = "";
+  signupCtrl.message = "" ;
 
-  console.log("this is form SignupFormController", signup);
+  console.log("signupCtrl", signupCtrl);
 
-  signup.saveSignupForm = function () {
-    SignupService.saveSignupForm(signup.user);
+  signupCtrl.saveSignupForm = function () {
+    MenuService.saveSignupForm(signupCtrl);
   };
 
-  signup.userdata = SignupService.getSignupData();
+  signupCtrl.message = MenuService.getMessage();
+  console.log("signupCtrl.message",signupCtrl.message);
 
 }
 

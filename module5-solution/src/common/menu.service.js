@@ -30,6 +30,56 @@ function MenuService($http, ApiPath) {
     });
   };
 
+  var message = [];
+
+  service.saveSignupForm = function (signupInfo) {
+
+    var menuNumber = signupInfo.favDish.toUpperCase(); 
+
+    if (menuNumber) {
+      console.log("menuNumber", menuNumber);
+      
+      return $http.get(ApiPath + '/menu_items/' + menuNumber + '.json')
+                  .then(function (response) { 
+                    console.log(response.data);
+                    console.log("The submit button was pressed.");
+
+                    var signup = { 
+                      fname: signupInfo.firstName,
+                      lname: signupInfo.lastName,
+                      email:  signupInfo.email,
+                      phone:  signupInfo.phone,
+                      favDish: signupInfo.favDish,
+                      menuName: response.data.name,
+                      description: response.data.description
+                    }
+                    signups.push(signup);
+                    console.log("signups = ", signups);
+                    console.log("signups.length", signups.length);
+                    message.push("saved");
+
+
+                    }, function (error) {
+                        console.log("Error: menu number doesn't exists.");
+                        message.push("No such menu number exists.",false);
+                        console.log("message.length", message.length);
+                    });
+    }
+
+  };
+  
+  service.getSignupData = function () {
+    console.log("signups",signups);
+    console.log("signups.length",signups.length);
+    return signups;
+  };
+
+  service.getMessage = function () {
+    console.log("message.", message);
+    return message;
+  };
+
+
 }
 
 })();

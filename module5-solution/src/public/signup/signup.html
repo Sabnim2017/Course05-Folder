@@ -1,4 +1,4 @@
-<div ng-controller="SignupFormController as signup" class="container col-med-4">
+<div class="container col-med-4">
 
 <h1 class="signupForm">Sign up for our newsletter</h1>
 <h3 class="signupForm">Complete the below form and we will send our eNewsletter.</h3></br>
@@ -38,7 +38,7 @@
     <!-- Favorite Dish Error Messages -->
     <li
       ng-if="(signupForm.favDish.$error.maxlength || signupForm.favDish.$error.required) && signupForm.favDish.$touched">
-      Last name must be at least 1 characters long
+      Menu number must be at maximum characters long
     </li>
     <li ng-if="signupForm.favDish.$invalid && signupForm.favDish.$touched">
        Menu number is a letter followed by a number e.g. B1 or B15
@@ -50,36 +50,38 @@
   	<label class="signupLabel">First Name</label><label class="signupLabel">Last Name</label>
   	</br>
     <input type="text" name="firstName" placeholder="First Name" class="signupInput"
-       ng-model="signup.user.firstName" required minlength="1" ng-maxlength="15">
+       ng-model="signupCtrl.firstName" required minlength="1" ng-maxlength="15">
 
     <input type="text" name="lastName" placeholder="Last Name" class="signupInput"
-       ng-model="signup.user.lastName" required minlength="1" ng-maxlength="20">
+       ng-model="signupCtrl.lastName" required minlength="1" ng-maxlength="20">
     </br>
     <label class="signupLabel">Email</label>
     </br>
     <input type="email" name="email" placeholder="Email" class="signupInput"
-       ng-model="signup.user.email" required>
+       ng-model="signupCtrl.email" required>
     </br>
     <label class="signupLabel">Phone</label>
     </br>
     <input type="text" name="phone" placeholder="Phone ###-###-####" class="signupInput"
-       ng-model="signup.user.phone" pattern="(\d{3})-(\d{3})-(\d{4})">
+       ng-model="signupCtrl.phone" pattern="(\d{3})-(\d{3})-(\d{4})">
     </br></br>
     <label class="signupLabel">What is menu number of your favorite dish?</label>
     </br>
     <input type="text" name="favDish" placeholder="Menu number" class="signupInput" 
-      ng-model="signup.user.favDish" required maxlength="5">
-      <span ng-if="signup.errorMessage">No such menu number exists.</span>
+      ng-model="signupCtrl.favDish" required maxlength="5">
+      <span ng-if="signupCtrl.message.length==2 ">No such menu number exists.</span>
     </br></br>
 
 
     <button class="signupInput"
       ng-disabled="signupForm.$invalid"
-      ng-click="signup.saveSignupForm()">Submit</button>
-    <span ng-if="signup.saveMessage">Your information has been saved</span>
-    <div>
-      {{signupFormData.firstName}}
-    </div>
+      ng-click="signupCtrl.saveSignupForm()">Submit</button>
+    <span ng-if="signupCtrl.message.length==1">Your information has been saved</span>
+    </br></br>
+    <button ng-if="signupCtrl.message.length==1" ui-sref="public.menu" 
+         class="text-center infoEntered">
+       Go Back</button>
+
     <div style="margin-top: 10px;">
       Form valid? {{ signupForm.$valid }}
     </div>

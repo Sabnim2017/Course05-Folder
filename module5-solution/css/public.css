@@ -58,6 +58,15 @@
   width: 20%;
 }
 /* End SIGN UP PAGE */
+/* MYINFO PAGE */
+.myinfo{
+  margin-left: 5%;
+}
+.myinfoLabel {
+  width: 80px;
+}
+
+/* End MYINFO PAGE */
 
 
 /* MENU CATEGORIES PAGE */

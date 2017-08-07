@@ -1,13 +1,23 @@
-<h1>Your Personal Information is displayed here</h1>
+<div class="myinfo">
 
-<div class="infoEntered">
-   {{ signup.user.firstName }} {{ signup.user.lastName }} </br>
-   {{ signup.user.email}}</br>
-   {{ signup.user.phone}}</br>
+<h1>You are signed up for our eNewsletter</h1>
+<h3>We have the following information for you:</h3>
+<br>
+
+<div ng-hide="signupCtrl.message.length==1">
+  <div ng-repeat="signup in myinfoCtrl.signups">
+    <label class="myinfoLabel">Name</label>{{signup.fname}}  {{signup.lname}}</br>
+    <label class="myinfoLabel">Email</label>{{signup.email}}</br>
+    <label class="myinfoLabel">Phone</label>{{signup.phone}}</br>
+    <label class="myinfoLabel">Favorite Dish</label>
+      {{signup.menuName}} - {{signup.description}} ({{signup.favDish.toUpperCase()}})
+  </div>
 </div>
 
-<div class="infoEntered">
-   {{ signup.firstName }} {{ signup.lastName }} </br>
-   {{ signup.user.email}}</br>
-   {{ signup.user.phone}}</br>
+
+<div ng-show="signupCtrl.message.length==2">
+  <h4>Not Signed Up Yet. Sign up Now!</h4>
+</div>
+
+
 </div>
