@@ -1,0 +1,91 @@
+<div class="container col-med-4">
+
+<h1 class="signupForm">Sign up for our newsletter</h1>
+<h3 class="signupForm">Complete the below form and we will send our eNewsletter.</h3></br>
+
+<fieldset>
+  <form name="signupForm" novalidate class="signupForm">
+  <div class="infoEntered">
+   {{ signup.user.firstName }} {{ signup.user.lastName }} </br>
+   {{ signup.user.email}}</br>
+   {{ signup.user.phone}}</br>
+   <span ng-if="signup.user.favDish"> Favorite dish: </span>{{ signup.user.favDish }}
+   <ul>
+    <!-- First Name Error Messages -->
+    <li
+      ng-if="(signupForm.firstName.$error.minlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched">
+      First name must be at least 1 characters long
+    </li>
+    <li ng-if="signupForm.firstName.$error.maxlength && signupForm.firstName.$touched">
+      First name can not be longer than 15 characters
+    </li>
+    <!-- Last Name Error Messages -->
+    <li
+      ng-if="(signupForm.lastName.$error.minlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched">
+      Last name must be at least 1 characters long
+    </li>
+    <li ng-if="signupForm.lastName.$error.maxlength && signupForm.lastName.$touched">
+      Last name can not be longer than 20 characters
+    </li>
+    <!-- Email Error Messages -->
+    <li ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+      Must be a valid email address: handle@domain format
+  	</li>
+  	<!-- Phone Error Messages -->
+  	<li ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+       Phone must be in the format ###-###-####.
+    </li>
+    <!-- Favorite Dish Error Messages -->
+    <li
+      ng-if="(signupForm.favDish.$error.maxlength || signupForm.favDish.$error.required) && signupForm.favDish.$touched">
+      Menu number must be at maximum characters long
+    </li>
+    <li ng-if="signupForm.favDish.$invalid && signupForm.favDish.$touched">
+       Menu number is a letter followed by a number e.g. B1 or B15
+    </li>
+    </ul>
+
+   </div>
+   <!-- Labels and Input fields -->
+  	<label class="signupLabel">First Name</label><label class="signupLabel">Last Name</label>
+  	</br>
+    <input type="text" name="firstName" placeholder="First Name" class="signupInput"
+       ng-model="signupCtrl.firstName" required minlength="1" ng-maxlength="15">
+
+    <input type="text" name="lastName" placeholder="Last Name" class="signupInput"
+       ng-model="signupCtrl.lastName" required minlength="1" ng-maxlength="20">
+    </br>
+    <label class="signupLabel">Email</label>
+    </br>
+    <input type="email" name="email" placeholder="Email" class="signupInput"
+       ng-model="signupCtrl.email" required>
+    </br>
+    <label class="signupLabel">Phone</label>
+    </br>
+    <input type="text" name="phone" placeholder="Phone ###-###-####" class="signupInput"
+       ng-model="signupCtrl.phone" pattern="(\d{3})-(\d{3})-(\d{4})">
+    </br></br>
+    <label class="signupLabel">What is menu number of your favorite dish?</label>
+    </br>
+    <input type="text" name="favDish" placeholder="Menu number" class="signupInput" 
+      ng-model="signupCtrl.favDish" required maxlength="5">
+      <span ng-if="signupCtrl.message.length==2 ">No such menu number exists.</span>
+    </br></br>
+
+
+    <button class="signupInput"
+      ng-disabled="signupForm.$invalid"
+      ng-click="signupCtrl.saveSignupForm()">Submit</button>
+    <span ng-if="signupCtrl.message.length==1">Your information has been saved</span>
+    </br></br>
+    <button ng-if="signupCtrl.message.length==1" ui-sref="public.home" 
+         class="text-center button">
+       Go Back</button>
+
+    <div style="margin-top: 10px;">
+      Form valid? {{ signupForm.$valid }}
+    </div>
+  </form>
+</fieldset>
+
+</div>
